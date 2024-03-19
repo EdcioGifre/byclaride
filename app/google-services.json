@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "8688616360",
+    "project_id": "byclaride-40a4c",
+    "storage_bucket": "byclaride-40a4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8688616360:android:ddade58e757c857df5939d",
+        "android_client_info": {
+          "package_name": "com.example.byclarider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8688616360-ot55f0gk99qjtuop4aopplmt04ifrqid.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.byclarider",
+            "certificate_hash": "04bde5ef5a5cce27383ed4c5f0b6b9ea29878246"
+          }
+        },
+        {
+          "client_id": "8688616360-n75eavp7kldauo9psiu1vmi56lgkbgmc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt6VovbCTnSMFg1icUSfi8LgyXehHNwFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8688616360-n75eavp7kldauo9psiu1vmi56lgkbgmc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
