@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MapaHome">
 
+
+
+
+
     <fragment
         android:id="@+id/map"
         android:layout_width="match_parent"
