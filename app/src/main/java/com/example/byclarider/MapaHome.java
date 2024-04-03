@@ -2,6 +2,7 @@ package com.example.byclarider;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -15,6 +16,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import android.os.Looper;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -50,9 +53,11 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
     AuthProvider mAuthProvider;
     private final static int LOCATION_REQUEST_CODE=1;
 
-
     private LocationRequest locationRequest;
     private FusedLocationProviderClient fusedLocation;
+    //Boton buscar ruta origen y destino
+    private Button btnOrigenDestino;
+
     LocationCallback locationCallback = new  LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult){
@@ -77,17 +82,22 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa_home);
 
-        mAuthProvider = new AuthProvider();
-
+        //Mapa
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync( this);
 
+        //Autenticación
         mAuth = FirebaseAuth.getInstance();
+        mAuthProvider = new AuthProvider();
 
         //Ubicación
         fusedLocation = LocationServices.getFusedLocationProviderClient(this);
 
+        //Menú - Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        //Origen y destino
 
         //mButtonCerrarSecion = findViewById(R.id.btnCerrarSecion);
 
@@ -100,6 +110,20 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
         });*/
     }
 
+    //Menú de opciones de 3 puntos
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    //opciones
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.logout)
+            logout();
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onStart() {
@@ -122,6 +146,8 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
         finish();
     }
 
+    //Visualización de mapa
+    //Dentro del mapa muestra la ubicación del usuario
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
@@ -138,6 +164,7 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
         starLocation();
     }
 
+    //Método necesario para la geolocalización
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -149,7 +176,7 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
             }
         }
     }
-
+    //Ubicación del usuario, con y sin permisos de ubicación
     private void starLocation(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
@@ -163,6 +190,7 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
         }
     }
 
+    //Permisos de localización
     private void checkLocationPermissions() {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
@@ -184,11 +212,11 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
             }
         }
     }
-
     void logout(){
         mAuthProvider.logout();
         Intent intent = new Intent(MapaHome.this,MainActivity.class);
         startActivity(intent);
         finish();
     }
+
 }
