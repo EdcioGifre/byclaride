@@ -34,7 +34,6 @@ android {
 
 dependencies {
 
-
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -46,6 +45,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.robolectric:robolectric:4.9.1")
     testImplementation("org.robolectric:annotations:4.9.1")
+
+    //Autocomplete
+    implementation("com.google.android.libraries.places:places:3.4.0")
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -60,11 +62,8 @@ dependencies {
 
     //Dependencia de Maps
     implementation("com.google.android.gms:play-services-maps:18.2.0")
-    implementation("com.google.maps.android:maps-compose:2.11.4")
     implementation("com.google.android.gms:play-services-location:21.2.0")
+    implementation("com.google.maps.android:maps-compose:2.11.4")
     //gif
     implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
-
-
-
 }
