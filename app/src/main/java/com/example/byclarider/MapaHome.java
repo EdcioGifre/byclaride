@@ -45,6 +45,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
@@ -52,6 +53,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.example.byclarider.modelo.AuthProvider;
+import com.google.maps.android.SphericalUtil;
 
 
 import java.util.Arrays;
@@ -74,20 +76,23 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
     //Boton buscar ruta origen y destino
     private Button btnOrigenDestino;
     private Button btnIrReportes;
-    private LatLng mOriginLatLng;
-    private String mDestination;
-    private LatLng mDestinationLatLng;
+    private LatLng mCurrentLatLng;
     //Autocomplete
     private PlacesClient mPlaces;
     private AutocompleteSupportFragment mAutocomplete;
-    private String mOrigin;
+    private AutocompleteSupportFragment mAutocompleteDestination;
 
+    private String mOrigin;
+    private LatLng mOriginLatLng;
+    private String mDestination;
+    private LatLng mDestinationLatLng;
     //hecho 10/04/2024
     LocationCallback locationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
             for(Location location: locationResult.getLocations()){
                 if(getApplicationContext() != null){
+                    mCurrentLatLng = new LatLng(location.getLatitude(),location.getLongitude());
                     //OBTENER LA LOCALIZACION DEL USUARIO EN TIEMPO REAL
                     mMap.moveCamera(CameraUpdateFactory.newCameraPosition(
                             new CameraPosition.Builder()
@@ -95,6 +100,7 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
                                     .zoom(15f)
                                     .build()
                     ));
+                    limitSearch();
                 }
             }
         }
@@ -115,22 +121,8 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
         }
 
         mPlaces = Places.createClient(this);
-        mAutocomplete = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.placeAutocompleteOrigin);
-        mAutocomplete.setPlaceFields(Arrays.asList(Place.Field.ID,Place.Field.LAT_LNG,Place.Field.NAME));
-        mAutocomplete.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onError(@NonNull Status status) {
-
-            }
-            @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                mOrigin = place.getName();
-                mOriginLatLng = place.getLatLng();
-                Log.d("PLACE","Name: "+mOrigin);
-                Log.d("PLACE","Lat: "+mOriginLatLng.latitude);
-                Log.d("PLACE","Lng: "+mOriginLatLng.longitude);
-            }
-        });
+        instanceAutocompleteOrigin();
+        instanceAutocompleteDestination();
 
         //Boton ir actividad reportes
         FloatingActionButton btnIrReportes=(FloatingActionButton)findViewById(R.id.btnIrReportes);
@@ -230,7 +222,6 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
         //Geolocalizacion
         locationRequest = new LocationRequest();
         locationRequest.setInterval(1000);
@@ -251,8 +242,7 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
                         fusedLocation.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());
                         mMap.setMyLocationEnabled(true);
                     }else{
-                        //showAlertDialogNOGPS();
-                        System.out.println("Prueba");
+                        showAlertDialogNOGPS();
                     }
                 }else{
                     checkLocationPermissions();
@@ -270,14 +260,13 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
         if(requestCode == SETTINGS_REQUEST_CODE && gpsActived()){
             fusedLocation.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());
             mMap.setMyLocationEnabled(true);
-        }else{
-            //showAlertDialogNOGPS();
-            System.out.println("Prueba");
+        }else if(requestCode == SETTINGS_REQUEST_CODE && !gpsActived()){
+            showAlertDialogNOGPS();
         }
     }
 
     //Método para ir a la configuración para activar el GPS
-    /*private void showAlertDialogNOGPS(){
+    private void showAlertDialogNOGPS(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Por favor activa la ubicación para continuar")
                 .setPositiveButton("Configuracion", new DialogInterface.OnClickListener() {
@@ -286,7 +275,60 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
                         startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), SETTINGS_REQUEST_CODE);
                     }
                 }).create().show();
-    }*/
+    }
+
+    /**
+     * Método para limitar la busqueda a la ciudad de Bogotá
+     */
+    private void limitSearch(){
+        LatLng northSide = SphericalUtil.computeOffset(mCurrentLatLng,5000,0);
+        LatLng southSide = SphericalUtil.computeOffset(mCurrentLatLng,5000,180);
+        mAutocomplete.setCountries("COL");
+        mAutocomplete.setLocationBias(RectangularBounds.newInstance(southSide,northSide));
+    }
+    /**
+     * Método para realizar la busqueda del destino
+     */
+    private void instanceAutocompleteDestination(){
+        mAutocompleteDestination = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.placeAutocompleteDestination);
+        mAutocompleteDestination.setPlaceFields(Arrays.asList(Place.Field.ID,Place.Field.LAT_LNG,Place.Field.NAME));
+        mAutocompleteDestination.setHint("Indica tu destino.");
+        mAutocompleteDestination.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onError(@NonNull Status status) {
+
+            }
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                mDestination = place.getName();
+                mDestinationLatLng = place.getLatLng();
+                Log.d("PLACE","Name: "+mDestination);
+                Log.d("PLACE","Lat: "+mDestinationLatLng.latitude);
+                Log.d("PLACE","Lng: "+mDestinationLatLng.longitude);
+            }
+        });
+    }
+
+    private void instanceAutocompleteOrigin(){
+        mAutocomplete = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.placeAutocompleteOrigin);
+        mAutocomplete.setPlaceFields(Arrays.asList(Place.Field.ID,Place.Field.LAT_LNG,Place.Field.NAME));
+        mAutocomplete.setHint("Indica tu origen.");
+        mAutocomplete.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onError(@NonNull Status status) {
+
+            }
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                mOrigin = place.getName();
+                mOriginLatLng = place.getLatLng();
+                Log.d("PLACE","Name: "+mOrigin);
+                Log.d("PLACE","Lat: "+mOriginLatLng.latitude);
+                Log.d("PLACE","Lng: "+mOriginLatLng.longitude);
+            }
+        });
+    }
+
 
     //Método para validar si el GPS esta activo o no
     private boolean gpsActived(){
@@ -328,8 +370,7 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
                     fusedLocation.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());
                     mMap.setMyLocationEnabled(true);
                 }else{
-                    //showAlertDialogNOGPS();
-                    System.out.println("Prueba");
+                    showAlertDialogNOGPS();
                 }
             }
             else{
@@ -340,8 +381,7 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
                 fusedLocation.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());
                 mMap.setMyLocationEnabled(true);
             }else{
-                //showAlertDialogNOGPS();
-                System.out.println("Prueba");
+                showAlertDialogNOGPS();
             }
         }
     }

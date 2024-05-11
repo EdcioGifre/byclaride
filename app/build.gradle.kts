@@ -64,6 +64,12 @@ dependencies {
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.2.0")
     implementation("com.google.maps.android:maps-compose:2.11.4")
+    implementation("com.google.maps.android:android-maps-utils:0.5")
+    //Api directions
+    implementation("com.squareup.retrofit2:retrofit:2.4.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.4.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.4.0")
+
     //gif
     implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.25")
 }
