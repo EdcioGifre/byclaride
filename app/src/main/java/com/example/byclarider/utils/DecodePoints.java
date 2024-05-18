@@ -5,6 +5,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DecodePoints {
     public static List decodePoly(String encoded) {
 

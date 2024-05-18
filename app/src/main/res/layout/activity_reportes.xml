@@ -6,4 +6,104 @@
     android:layout_height="match_parent"
     tools:context=".modelo.Reportes">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-76dp">
+
+        <!--     android:src="@android:drawable/bache" />-->
+        <!--android:src="@tools:sample/avatars" /> -->
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="177dp"
+            android:layout_height="172dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/advertencia" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="139dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/imgButtonBache"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="reporteBache"
+                android:scaleType="fitCenter"
+                android:src="@drawable/bache" />
+            <!--android:src="@android:drawable/btn_star" />-->
+
+            <ImageButton
+                android:id="@+id/imgButtonLuz"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="reporteLuz"
+                android:scaleType="fitCenter"
+                android:src="@drawable/luz" />
+            <!--android:src="@android:drawable/btn_star" />-->
+
+            <ImageButton
+                android:id="@+id/imgButtonRobo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="reporteRobo"
+                android:scaleType="fitCenter"
+                android:src="@drawable/robo" />
+            <!--android:src="@android:drawable/btn_star" />-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="337dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnCamara"
+                android:layout_width="96dp"
+                android:layout_height="91dp"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:contentDescription="camara"
+                android:scaleType="fitCenter"
+                android:src="@drawable/camara" />
+
+            <!--
+            <ImageView
+                android:id="@+id/iv_visor"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/app_name"
+                tools:srcCompat="@tools:sample/avatars" />
+            -->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="156dp"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="-9dp"
+            tools:layout_editor_absoluteY="457dp">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_vertical"
+
+                android:text="Reportar" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

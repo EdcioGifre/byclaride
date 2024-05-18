@@ -77,15 +77,14 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
                     mPolylineList = DecodePoints.decodePoly(points);
                     mPolylineOptions = new PolylineOptions();
                     mPolylineOptions.color(Color.DKGRAY);
-                    mPolylineOptions.width(13f);
+                    mPolylineOptions.width(8f);
                     mPolylineOptions.startCap(new SquareCap());
                     mPolylineOptions.jointType(JointType.ROUND);
                     mPolylineOptions.addAll(mPolylineList);
                     mMap.addPolyline(mPolylineOptions);
 
-
                 }catch (Exception e){
-                    Log.d("Error", "Error encontrado " + e.getMessage());
+                    Log.d("Error", "Error encontrado" + e.getMessage());
                 }
             }
 
@@ -109,6 +108,6 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
                         .zoom(15f)
                         .build()
         ));
-        //drawRoute();
+        drawRoute();
     }
 }
