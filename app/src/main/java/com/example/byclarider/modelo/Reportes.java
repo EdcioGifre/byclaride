@@ -18,10 +18,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 //import com.example.byclarider.Manifest;
 import com.example.byclarider.R;
+import com.example.byclarider.presentador.DetailRequestActivity;
+import com.example.byclarider.presentador.MapaHome;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +32,7 @@ import java.io.IOException;
 public class Reportes extends AppCompatActivity {
 
     ImageButton btnCamara;
+    Button btnReporte;
 
     //ImageView visor;
 
@@ -42,6 +46,7 @@ public class Reportes extends AppCompatActivity {
         setContentView(R.layout.activity_reportes);
 
         btnCamara = findViewById(R.id.btnCamara);
+        btnReporte = findViewById(R.id.button);
         //visor = findViewById(R.id.iv_visor);
 /*
         if (ContextCompat.checkSelfPermission(Reportes.this,
@@ -55,7 +60,16 @@ public class Reportes extends AppCompatActivity {
         }
 
  */
-
+        btnReporte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Mostrar mensaje de reporte exitoso
+                Toast.makeText(Reportes.this, "El reporte se ha realizado correctamente", Toast.LENGTH_SHORT).show();
+                // Cerrar esta actividad y volver a la actividad anterior
+                //finish();
+                onBackPressed();
+            }
+        });
 
         btnCamara.setOnClickListener(new View.OnClickListener() {
             @Override

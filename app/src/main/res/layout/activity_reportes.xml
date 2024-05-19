@@ -61,18 +61,21 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="337dp"
-            android:orientation="horizontal">
+            android:layout_height="147dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
 
             <ImageButton
                 android:id="@+id/btnCamara"
-                android:layout_width="96dp"
-                android:layout_height="91dp"
-                android:layout_gravity="left"
+                android:layout_width="167dp"
+                android:layout_height="49dp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:contentDescription="camara"
                 android:scaleType="fitCenter"
                 android:src="@drawable/camara" />
+
 
             <!--
             <ImageView
@@ -86,22 +89,35 @@
 
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="156dp"
+            android:layout_height="275dp"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="-9dp"
             tools:layout_editor_absoluteY="457dp">
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center_vertical"
+            <EditText
+                android:id="@+id/editTextComentario"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:hint="Ingrese un comentario"
+                android:inputType="textMultiLine"
+                android:maxLines="3"
+                android:scrollbars="vertical" />
 
-                android:text="Reportar" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_vertical"
+
+            android:text="Reportar" />
 
     </LinearLayout>
 

@@ -1,4 +1,4 @@
-package com.example.byclarider.utils;
+package com.example.byclarider.resources.utils;
 
 import com.google.android.gms.maps.model.LatLng;
 

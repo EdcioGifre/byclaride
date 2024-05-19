@@ -1,9 +1,8 @@
 package com.example.byclarider;
 import android.content.Intent;
-import android.widget.TextView;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.FirebaseUser;
+
+import com.example.byclarider.presentador.MainActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

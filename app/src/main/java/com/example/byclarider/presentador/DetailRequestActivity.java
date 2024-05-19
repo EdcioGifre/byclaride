@@ -1,15 +1,20 @@
-package com.example.byclarider;
+package com.example.byclarider.presentador;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.byclarider.R;
 import com.example.byclarider.modelo.GoogleApiProvider;
-import com.example.byclarider.utils.DecodePoints;
+import com.example.byclarider.modelo.Reportes;
+import com.example.byclarider.resources.utils.DecodePoints;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -21,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.SquareCap;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,11 +45,18 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
     private double mExtraOriginLng;
     private double mExtraDestinationLat;
     private double mExtraDestinationLng;
+    private String mExtraOrigin;
+    private String mExtraDestination;
     private LatLng mOriginLatLng;
     private LatLng mDestinationLatLng;
     private GoogleApiProvider mGoogleApiProvider;
     private List<LatLng> mPolylineList;
     private PolylineOptions mPolylineOptions;
+    private TextView mTextViewOrigin;
+    private TextView mTextViewDestination;
+    private TextView mTextViewTime;
+    private TextView mTextViewDistance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,16 +65,38 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync( this);
 
-
         mExtraOriginLat = getIntent().getDoubleExtra("origin_lat", 0);
         mExtraOriginLng = getIntent().getDoubleExtra("origin_lng", 0);
         mExtraDestinationLat = getIntent().getDoubleExtra("destination_lat", 0);
         mExtraDestinationLng = getIntent().getDoubleExtra("destination_lng", 0);
+        mExtraOrigin = getIntent().getStringExtra("origin");
+        mExtraDestination = getIntent().getStringExtra("destination");
 
         mOriginLatLng = new LatLng(mExtraOriginLat, mExtraOriginLng);
         mDestinationLatLng = new LatLng(mExtraDestinationLat, mExtraDestinationLng);
 
         mGoogleApiProvider = new GoogleApiProvider(DetailRequestActivity.this);
+
+        mTextViewOrigin = findViewById(R.id.textViewOrigin);
+        mTextViewDestination = findViewById(R.id.textViewDestination);
+        mTextViewTime = findViewById(R.id.textViewTime);
+        mTextViewDistance = findViewById(R.id.textViewDistance);
+
+        mTextViewOrigin.setText(mExtraOrigin);
+        mTextViewDestination.setText(mExtraDestination);
+
+        //Boton ir actividad reportes
+        FloatingActionButton btnIrReportes2=(FloatingActionButton)findViewById(R.id.btnIrReportes2);
+
+        btnIrReportes2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailRequestActivity.this, Reportes.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
     }
 
     public void drawRoute(){
@@ -77,11 +112,20 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
                     mPolylineList = DecodePoints.decodePoly(points);
                     mPolylineOptions = new PolylineOptions();
                     mPolylineOptions.color(Color.DKGRAY);
-                    mPolylineOptions.width(8f);
+                    mPolylineOptions.width(13f);
                     mPolylineOptions.startCap(new SquareCap());
                     mPolylineOptions.jointType(JointType.ROUND);
                     mPolylineOptions.addAll(mPolylineList);
                     mMap.addPolyline(mPolylineOptions);
+
+                    JSONArray legs = route.getJSONArray("legs");
+                    JSONObject leg = legs.getJSONObject(0);
+                    JSONObject distance = leg.getJSONObject("distance");
+                    JSONObject duration = leg.getJSONObject("duration");
+                    String distanceText = distance.getString("text");
+                    String durationText = duration.getString("text");
+                    mTextViewTime.setText(durationText);
+                    mTextViewDistance.setText(distanceText);
 
                 }catch (Exception e){
                     Log.d("Error", "Error encontrado" + e.getMessage());
@@ -110,4 +154,5 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
         ));
         drawRoute();
     }
+
 }

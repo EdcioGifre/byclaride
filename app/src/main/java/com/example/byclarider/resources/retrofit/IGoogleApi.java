@@ -1,4 +1,4 @@
-package com.example.byclarider.retrofit;
+package com.example.byclarider.resources.retrofit;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

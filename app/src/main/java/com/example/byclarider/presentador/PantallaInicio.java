@@ -1,10 +1,12 @@
-package com.example.byclarider;
+package com.example.byclarider.presentador;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.example.byclarider.R;
 
 
 public class PantallaInicio extends AppCompatActivity {

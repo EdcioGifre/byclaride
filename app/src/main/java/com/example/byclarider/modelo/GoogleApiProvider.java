@@ -2,10 +2,9 @@ package com.example.byclarider.modelo;
 
 import android.content.Context;
 
-import com.example.byclarider.DetailRequestActivity;
 import com.example.byclarider.R;
-import com.example.byclarider.retrofit.IGoogleApi;
-import com.example.byclarider.retrofit.RetrofitClient;
+import com.example.byclarider.resources.retrofit.IGoogleApi;
+import com.example.byclarider.resources.retrofit.RetrofitClient;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Date;

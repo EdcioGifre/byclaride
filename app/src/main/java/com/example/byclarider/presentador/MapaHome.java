@@ -1,4 +1,4 @@
-package com.example.byclarider;
+package com.example.byclarider.presentador;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,7 +10,6 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.LocaleManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +28,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.byclarider.R;
 import com.example.byclarider.modelo.Reportes;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -42,7 +42,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.RectangularBounds;
@@ -57,10 +56,6 @@ import com.google.maps.android.SphericalUtil;
 
 
 import java.util.Arrays;
-
-import javax.security.auth.Subject;
-import javax.security.auth.callback.CallbackHandler;
-import javax.security.auth.login.LoginException;
 
 public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
     FirebaseAuth mAuth;
@@ -132,7 +127,7 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
             public void onClick(View v) {
                 Intent intent = new Intent(MapaHome.this, Reportes.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 
@@ -173,6 +168,8 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
             intent.putExtra("origin_lng",mOriginLatLng.longitude);
             intent.putExtra("destination_lat",mDestinationLatLng.latitude);
             intent.putExtra("destination_lng",mDestinationLatLng.longitude);
+            intent.putExtra("origin", mOrigin);
+            intent.putExtra("destination", mDestination);
             startActivity(intent);
         }else{
             Toast.makeText(this,"Seleccione una dirección",Toast.LENGTH_SHORT).show();
