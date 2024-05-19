@@ -12,13 +12,14 @@
         layout="@layout/toolbar_layout" />
 
 
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
         <fragment
             android:id="@+id/map"
@@ -26,13 +27,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnIrReportes2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:contentDescription="Buscar"
             android:src="@drawable/fileopen"
             tools:layout_editor_absoluteY="518dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -134,12 +138,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnRequestNow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="Buscar ruta" />
 
     </LinearLayout>
 

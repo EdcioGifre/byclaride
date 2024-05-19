@@ -16,6 +16,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class Reportes extends AppCompatActivity {
 
     ImageButton btnCamara;
     Button btnReporte;
+    EditText editTextComentario;
 
     //ImageView visor;
 
@@ -47,6 +49,7 @@ public class Reportes extends AppCompatActivity {
 
         btnCamara = findViewById(R.id.btnCamara);
         btnReporte = findViewById(R.id.button);
+        editTextComentario = findViewById(R.id.editTextComentario);
         //visor = findViewById(R.id.iv_visor);
 /*
         if (ContextCompat.checkSelfPermission(Reportes.this,
@@ -61,13 +64,20 @@ public class Reportes extends AppCompatActivity {
 
  */
         btnReporte.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-                // Mostrar mensaje de reporte exitoso
-                Toast.makeText(Reportes.this, "El reporte se ha realizado correctamente", Toast.LENGTH_SHORT).show();
-                // Cerrar esta actividad y volver a la actividad anterior
-                //finish();
-                onBackPressed();
+                // Obtener el texto del campo de comentario
+                String comentario = editTextComentario.getText().toString();
+
+                // Verificar si el campo está vacío
+                if (comentario.isEmpty()) {
+                    // Mostrar un mensaje de error si el campo está vacío
+                    Toast.makeText(Reportes.this, "El campo de comentario no puede estar vacío", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Mostrar mensaje de reporte exitoso
+                    Toast.makeText(Reportes.this, "El reporte se ha realizado correctamente", Toast.LENGTH_SHORT).show();
+                    // Cerrar esta actividad y volver a la actividad anterior
+                    onBackPressed();
+                }
             }
         });
 

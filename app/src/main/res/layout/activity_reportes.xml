@@ -16,17 +16,32 @@
         <!--     android:src="@android:drawable/bache" />-->
         <!--android:src="@tools:sample/avatars" /> -->
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="REPORTES"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="177dp"
-            android:layout_height="172dp"
+            android:layout_width="208dp"
+            android:layout_height="173dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
             android:background="@drawable/advertencia" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="139dp"
-            android:orientation="horizontal">
+            android:layout_height="154dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <!--android:src="@android:drawable/btn_star" />-->
 
             <ImageButton
                 android:id="@+id/imgButtonBache"
@@ -36,7 +51,6 @@
                 android:contentDescription="reporteBache"
                 android:scaleType="fitCenter"
                 android:src="@drawable/bache" />
-            <!--android:src="@android:drawable/btn_star" />-->
 
             <ImageButton
                 android:id="@+id/imgButtonLuz"
@@ -89,37 +103,38 @@
 
         </LinearLayout>
 
+        <!--
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:orientation="horizontal"
+                    tools:layout_editor_absoluteX="-9dp"
+                    tools:layout_editor_absoluteY="457dp">
 
-        <LinearLayout
+
+                </LinearLayout>
+              -->
+
+        <EditText
+            android:id="@+id/editTextComentario"
             android:layout_width="match_parent"
-            android:layout_height="275dp"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="-9dp"
-            tools:layout_editor_absoluteY="457dp">
-
-            <EditText
-                android:id="@+id/editTextComentario"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:hint="Ingrese un comentario"
-                android:inputType="textMultiLine"
-                android:maxLines="3"
-                android:scrollbars="vertical" />
-
-
-        </LinearLayout>
+            android:layout_height="213dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:hint="Ingrese un comentario"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:scrollbars="vertical" />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_vertical"
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_vertical"
 
-            android:text="Reportar" />
+                    android:text="Reportar" />
 
-    </LinearLayout>
+            </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
