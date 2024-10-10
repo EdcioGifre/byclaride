@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".presentador.DetailRequestActivity">
+    tools:context=".vista.DetailRequestActivity">
 
     <include
         android:id="@+id/include"
@@ -32,8 +32,8 @@
             android:id="@+id/btnIrReportes2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:contentDescription="Buscar"
+            android:layout_marginLeft="15sp"
+            android:contentDescription="@string/buscar"
             android:src="@drawable/fileopen"
             tools:layout_editor_absoluteY="518dp" />
 
@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Origen: "
+                android:text="@string/origen"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Destino: "
+                android:text="@string/destino"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -102,7 +102,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tiempo: "
+                    android:text="@string/tiempo"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -124,7 +124,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Distancia: "
+                    android:text="@string/distancia"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 

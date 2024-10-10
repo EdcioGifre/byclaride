@@ -4,28 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modelo.Reportes">
+    tools:context=".vista.Reportes">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-76dp">
-
-        <!--     android:src="@android:drawable/bache" />-->
-        <!--android:src="@tools:sample/avatars" /> -->
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="31dp"
             android:layout_gravity="center"
+            android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="REPORTES"
+            android:text="@string/reportes2"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp" />
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -33,44 +30,65 @@
             android:layout_height="173dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:background="@drawable/advertencia" />
+            android:background="@drawable/advertencia"
+            android:contentDescription="@string/todo" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="154dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
-            <!--android:src="@android:drawable/btn_star" />-->
-
-            <ImageButton
+            <ImageView
                 android:id="@+id/imgButtonBache"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="reporteBache"
-                android:scaleType="fitCenter"
-                android:src="@drawable/bache" />
+                android:background="@drawable/bache"
+                android:contentDescription="@string/todo2" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/imgButtonLuz"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="reporteLuz"
-                android:scaleType="fitCenter"
-                android:src="@drawable/luz" />
-            <!--android:src="@android:drawable/btn_star" />-->
+                android:src="@drawable/luz"
+                android:contentDescription="@string/todo2" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/imgButtonRobo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="reporteRobo"
-                android:scaleType="fitCenter"
-                android:src="@drawable/robo" />
-            <!--android:src="@android:drawable/btn_star" />-->
+                android:src="@drawable/robo"
+                android:contentDescription="@string/todo2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#562196F3">
+            <CheckBox
+                android:id="@+id/radioBtnBache"
+                android:layout_width="131dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/bache" />
+
+            <CheckBox
+                android:id="@+id/radioBtnLuz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/baja_iluminaci_n" />
+
+            <CheckBox
+                android:id="@+id/radioBtnRobo"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/robo" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -79,41 +97,17 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-
             <ImageButton
                 android:id="@+id/btnCamara"
                 android:layout_width="167dp"
                 android:layout_height="49dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:contentDescription="camara"
+                android:contentDescription="@string/camara"
                 android:scaleType="fitCenter"
                 android:src="@drawable/camara" />
 
-
-            <!--
-            <ImageView
-                android:id="@+id/iv_visor"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:contentDescription="@string/app_name"
-                tools:srcCompat="@tools:sample/avatars" />
-            -->
-
         </LinearLayout>
-
-        <!--
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="57dp"
-                    android:orientation="horizontal"
-                    tools:layout_editor_absoluteX="-9dp"
-                    tools:layout_editor_absoluteY="457dp">
-
-
-                </LinearLayout>
-              -->
 
         <EditText
             android:id="@+id/editTextComentario"
@@ -121,20 +115,21 @@
             android:layout_height="213dp"
             android:layout_weight="1"
             android:gravity="start"
-            android:hint="Ingrese un comentario"
+            android:hint="@string/ingrese_un_comentario"
             android:inputType="textMultiLine"
             android:maxLines="3"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:background="#562196F3"/>
 
         <Button
-                    android:id="@+id/button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|center_vertical"
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_vertical"
+            android:text="@string/reportar"
+            android:onClick="writeFireBase"
+            android:backgroundTint="#744CAF50"/>
 
-                    android:text="Reportar" />
+    </LinearLayout>
 
-            </LinearLayout>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

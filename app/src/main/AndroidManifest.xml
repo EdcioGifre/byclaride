@@ -23,10 +23,10 @@
         android:theme="@style/Theme.ByclaRider"
         tools:targetApi="31">
         <activity
-            android:name=".modelo.Reportes"
+            android:name=".vista.Reportes"
             android:exported="false" />
         <activity
-            android:name=".presentador.DetailRequestActivity"
+            android:name=".vista.DetailRequestActivity"
             android:exported="true" />
         <!--
         <activity
@@ -40,13 +40,13 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".presentador.MapaHome"
+            android:name=".vista.MapaHome"
             android:exported="true" />
         <activity
-            android:name=".presentador.MainActivity"
+            android:name=".vista.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".presentador.PantallaInicio"
+            android:name=".vista.PantallaInicio"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

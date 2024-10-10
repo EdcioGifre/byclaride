@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 import android.content.Intent;
 
-import com.example.byclarider.presentador.MainActivity;
+import com.example.byclarider.vista.MainActivity;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

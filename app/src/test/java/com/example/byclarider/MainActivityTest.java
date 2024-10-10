@@ -1,8 +1,6 @@
 package com.example.byclarider;
 import android.content.Intent;
 
-import com.example.byclarider.presentador.MainActivity;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +10,8 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.*;
+
+import com.example.byclarider.vista.MainActivity;
 //import static org.mockito.ArgumentMatchers.any;
 //import static org.mockito.Mockito.mock;
 //import static org.mockito.Mockito.times;

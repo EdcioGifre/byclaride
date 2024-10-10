@@ -1,4 +1,4 @@
-package com.example.byclarider.presentador;
+package com.example.byclarider.vista;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,12 +8,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.byclarider.R;
 import com.example.byclarider.modelo.GoogleApiProvider;
-import com.example.byclarider.modelo.Reportes;
 import com.example.byclarider.resources.utils.DecodePoints;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -96,7 +94,6 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
                 //finish();
             }
         });
-
     }
 
     public void drawRoute(){

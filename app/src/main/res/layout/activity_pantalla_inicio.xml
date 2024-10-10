@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/byclaride"
     android:visibility="visible"
-    tools:context=".presentador.PantallaInicio">
+    tools:context=".vista.PantallaInicio">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

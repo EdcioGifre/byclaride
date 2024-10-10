@@ -1,7 +1,8 @@
-package com.example.byclarider.presentador;
+package com.example.byclarider.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,21 +29,22 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 1;
-    GoogleSignInClient mGoogleSignInClient;
+    public GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth mAuth;
 
     SignInButton mSignInButtonGoogle;
     TextView mTextViewRespuesta;
 
+    @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
 
         mSignInButtonGoogle = findViewById(R.id.btnGoogle);
-       // mTextViewRespuesta = findViewById(R.id.textViewRespuesta);
+        mTextViewRespuesta = findViewById(R.id.textViewRespuesta);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -76,19 +78,22 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-
-                firebaseAuthWithGoogle(account.getIdToken());
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                //mTextViewRespuesta.setText(e.getMessage());
-                Log.e("GoogleSignIn", "Sign in failed with code: " + e.getStatusCode(), e);
-                mTextViewRespuesta.setText("Sign in failed with code: " + e.getStatusCode());
+            System.out.println("==DATA==: "+data.toString());
+            if (data != null) { // Verifica que 'data' no sea nulo
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                try {
+                    // Google Sign In was successful, authenticate with Firebase
+                    GoogleSignInAccount account = task.getResult(ApiException.class);
+                    firebaseAuthWithGoogle(account.getIdToken());
+                } catch (ApiException e) {
+                    // Google Sign In failed, update UI appropriately
+                    mTextViewRespuesta.setText(e.getMessage());
+                    Log.e("GoogleSignIn", "Sign in failed with code: " + e.getStatusCode(), e);
+                }
+            } else {
+                mTextViewRespuesta.setText("Sign in was canceled or failed.");
+                Log.e("GoogleSignIn", "Sign in data is null.");
             }
         }
     }

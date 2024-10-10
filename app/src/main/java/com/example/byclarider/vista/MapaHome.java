@@ -1,4 +1,4 @@
-package com.example.byclarider.presentador;
+package com.example.byclarider.vista;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +29,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.byclarider.R;
-import com.example.byclarider.modelo.Reportes;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -147,15 +146,6 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
                 requestDriver();
             }
         });
-
-        //mButtonCerrarSecion = findViewById(R.id.btnCerrarSecion);
-        /*
-        mButtonCerrarSecion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
-            }
-        });*/
     }
     /*
     origen y destino
@@ -200,12 +190,6 @@ public class MapaHome extends AppCompatActivity implements OnMapReadyCallback{
         }
     }
 
-    /*
-    private void logout() {
-        mAuth.signOut();
-        irMain();
-    }
-    */
     private void irMain() {
         Intent intent = new Intent(MapaHome.this, MainActivity.class);
         startActivity(intent);

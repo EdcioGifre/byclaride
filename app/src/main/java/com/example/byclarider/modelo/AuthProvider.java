@@ -8,7 +8,6 @@ public class AuthProvider {
 
     public AuthProvider() {
         mAuth = FirebaseAuth.getInstance();
-
     }
 
     public void logout(){
